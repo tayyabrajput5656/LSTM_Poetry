@@ -66,7 +66,7 @@ model.build(input_shape=(None, max_sequence_len - 1))
 model.load_weights("model.weights.h5")
 
 # Poetry Generation Function
-def generate_poetry(seed_text, words_per_line=6, total_lines=4):
+def generate_poetry(seed_text, words_per_line, total_lines):
     poem = ""
     for _ in range(total_lines):
         current_line = seed_text
@@ -86,8 +86,11 @@ def generate_poetry(seed_text, words_per_line=6, total_lines=4):
 
     return poem
 
-# User Input Box
+# User Inputs
 seed_text = st.text_input("Enter a seed phrase for poetry:", value="kha ho tum")
+
+total_lines = st.number_input("Total Lines in Poetry:", min_value=1, max_value=10, value=4, step=1)
+words_per_line = st.number_input("Words per Line:", min_value=2, max_value=10, value=6, step=1)
 
 # Generate Poetry Button
 if st.button("Generate Poetry 🎶"):
@@ -97,7 +100,7 @@ if st.button("Generate Poetry 🎶"):
             time.sleep(0.03)  # Delay to show animation effect
             progress_bar.progress(i + 1)  # Update Progress Bar
         
-        poetry = generate_poetry(seed_text)
+        poetry = generate_poetry(seed_text, words_per_line, total_lines)
         progress_bar.empty()  # Remove progress bar after completion
 
     st.markdown('<h3 class="generated-text">{}</h3>'.format(poetry.replace("\n", "<br>")), unsafe_allow_html=True)
