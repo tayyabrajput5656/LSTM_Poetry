@@ -41,7 +41,7 @@ st.markdown('<h1 class="title">Roman Urdu Poetry Generator 🎤</h1>', unsafe_al
 
 # Load Tokenizer & Prepare Data
 tokenizer = Tokenizer()
-data = open('/content/romanized_urdu_poetry_3.txt').read()
+data = open('romanized_urdu_poetry_3.txt').read()
 corpus = data.lower().split("\n")
 tokenizer.fit_on_texts(corpus)
 total_words = len(tokenizer.word_index) + 1
