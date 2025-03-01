@@ -1,5 +1,6 @@
 import streamlit as st
 import numpy as np
+import time
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.models import Sequential
@@ -90,7 +91,15 @@ seed_text = st.text_input("Enter a seed phrase for poetry:", value="kha ho tum")
 
 # Generate Poetry Button
 if st.button("Generate Poetry 🎶"):
-    poetry = generate_poetry(seed_text)
+    with st.spinner("✨ Generating beautiful poetry... Please wait! 🎶"):
+        progress_bar = st.progress(0)  # Initialize Progress Bar
+        for i in range(100):
+            time.sleep(0.03)  # Delay to show animation effect
+            progress_bar.progress(i + 1)  # Update Progress Bar
+        
+        poetry = generate_poetry(seed_text)
+        progress_bar.empty()  # Remove progress bar after completion
+
     st.markdown('<h3 class="generated-text">{}</h3>'.format(poetry.replace("\n", "<br>")), unsafe_allow_html=True)
 
 st.markdown("### 🎨 **Enjoy the magic of AI poetry!**")
