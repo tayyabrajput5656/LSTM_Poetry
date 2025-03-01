@@ -62,7 +62,7 @@ model = Sequential([
 model.build(input_shape=(None, max_sequence_len - 1))
 
 # Load saved weights
-model.load_weights("/content/model.weights.h5")
+model.load_weights("model.weights.h5")
 
 # Poetry Generation Function
 def generate_poetry(seed_text, words_per_line=6, total_lines=4):
